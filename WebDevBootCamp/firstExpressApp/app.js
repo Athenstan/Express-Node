@@ -2,6 +2,9 @@ var express = require("express");
 
 var app = express(); 
 
+// The order of routes do matter.
+
+
 // Testing: when you go to "/" you should get hi 
 // Using app.get, The fucntion requires two parameters path, and a function() 
 app.get("/", function(req, res){
@@ -16,7 +19,9 @@ app.get("/dog", function(req,res){
 	res.send("WOOF");
 });
 
-
+app.get("*", function(req, res){
+	res.send("You are a star");
+});
 
 
 

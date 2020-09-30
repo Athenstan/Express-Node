@@ -8,3 +8,6 @@ request('https://jsonplaceholder.typicode.com/users/1', function (error, respons
       console.log(parsedData.name + " lives in " + parsedData.address.city);
   }
 });
+
+//`http://www.omdbapi.com/?s=${query}&apikey=thewdb`
+

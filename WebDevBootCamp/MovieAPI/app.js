@@ -5,17 +5,25 @@ const { response } = require("express");
 
  var express = require("express"); 
  var app = express(); 
-
+ 
 var request = require("request"); 
+app.set("view engine", "ejs"); 
 
 app.get("/results", function(req, res){
-    request("http://www.omdbapi.com/?s=star&apikey=thewdb", function(error, request, body ){
+    var searched = req.query.search;
+    var URL = "http://www.omdbapi.com/?s=" + searched +"&apikey=thewdb"; 
+    request(URL, function(error, request, body ){
         if(!error && response.statusCode == 200){
-            var results = JSON.parse(body); 
-            res.send(results.Search[0].Title); 
+            var data = JSON.parse(body); 
+            // res.send(results.Search[0].Title); Commenting out for the use of the render page instead
+            res.render("results", {data:data}); // Use the curly brackets to bring the data from the javascript into the EJS or the HTML File. 
         }
     })
-})
+});
+
+app.get("/search", function(req, res){
+    res.render("search"); 
+});
 
 
 
